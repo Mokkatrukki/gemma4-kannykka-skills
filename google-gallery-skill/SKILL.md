@@ -55,12 +55,12 @@ Create in the current working directory unless the user specifies otherwise.
 
 **Body:** Markdown instructions for the LLM — when to call the skill, exact JSON input fields, how to interpret outputs, error handling.
 
-**SKILL.md template:**
-```markdown
----
+**SKILL.md template** (replace `~~~` with triple backticks when writing the actual file):
+```
+~~~ (opening frontmatter)
 name: <skill-name>
-description: <what it does. Trigger when: user says X, Y, Z.>
----
+description: "<what it does. Trigger when: user says X, Y, Z.>"
+~~~ (closing frontmatter)
 
 # <Display Name>
 
