@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gemma Calendar Skills</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 16px; }
+    h1 { font-size: 1.4rem; }
+    .skill { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 12px 0; }
+    .skill h2 { font-size: 1rem; margin: 0 0 4px; }
+    .skill p { margin: 0 0 8px; color: #555; font-size: 0.9rem; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Gemma Calendar Skills</h1>
+  <p>Add these skills to <a href="https://github.com/google-ai-edge/gallery">Google AI Edge Gallery</a> by pasting the URL.</p>
+
+  <div class="skill">
+    <h2>📸 Calendar Capture</h2>
+    <p>Take a photo or describe an event — Gemma extracts and saves it.</p>
+    <code id="url-capture"></code>
+  </div>
+
+  <div class="skill">
+    <h2>🗄️ Calendar Storage</h2>
+    <p>Local event database with search/RAG. Used by other skills.</p>
+    <code id="url-storage"></code>
+  </div>
+
+  <div class="skill">
+    <h2>🔄 Calendar Sync</h2>
+    <p>Pushes saved events to Google Calendar. Requires OAuth2 token.</p>
+    <code id="url-sync"></code>
+  </div>
+
+  <script>
+    const base = window.location.origin + window.location.pathname.replace('index.html', '');
+    document.getElementById('url-capture').textContent = base + 'calendar-capture/SKILL.md';
+    document.getElementById('url-storage').textContent = base + 'calendar-storage/SKILL.md';
+    document.getElementById('url-sync').textContent = base + 'calendar-sync/SKILL.md';
+  </script>
+</body>
+</html>

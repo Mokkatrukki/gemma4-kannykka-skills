@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+<script>
+window['ai_edge_gallery_get_result'] = async (data) => {
+  try {
+    const input = JSON.parse(data);
+    const { action } = input;
+
+    const KEY = 'calendar_storage_events';
+    const load = () => JSON.parse(localStorage.getItem(KEY) || '[]');
+    const save = (items) => localStorage.setItem(KEY, JSON.stringify(items));
+
+    // ── ADD ──────────────────────────────────────────────────────────────
+    if (action === 'add') {
+      if (!input.name || !input.date || !input.startTime) {
+        return JSON.stringify({ error: 'Missing required fields: name, date, startTime' });
+      }
+      const items = load();
+      const event = {
+        id: `evt_${Date.now()}`,
+        name: input.name,
+        date: input.date,
+        startTime: input.startTime,
+        endTime: input.endTime || null,
+        location: input.location || null,
+        description: input.description || null,
+        synced: false,
+        googleEventId: null,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      };
+      items.push(event);
+      save(items);
+      return JSON.stringify({ result: `Added: ${event.id}` });
+    }
+
+    // ── UPDATE ───────────────────────────────────────────────────────────
+    if (action === 'update') {
+      if (!input.id) return JSON.stringify({ error: 'Missing id' });
+      const items = load();
+      const idx = items.findIndex(i => i.id === input.id);
+      if (idx === -1) return JSON.stringify({ error: `Event not found: ${input.id}` });
+      const allowed = ['name', 'date', 'startTime', 'endTime', 'location', 'description'];
+      allowed.forEach(field => {
+        if (input[field] !== undefined) items[idx][field] = input[field];
+      });
+      items[idx].synced = false;
+      items[idx].updatedAt = Date.now();
+      save(items);
+      return JSON.stringify({ result: `Updated: ${input.id}` });
+    }
+
+    // ── DELETE ───────────────────────────────────────────────────────────
+    if (action === 'delete') {
+      if (!input.id) return JSON.stringify({ error: 'Missing id' });
+      const before = load();
+      const after = before.filter(i => i.id !== input.id);
+      if (before.length === after.length) return JSON.stringify({ error: `Event not found: ${input.id}` });
+      save(after);
+      return JSON.stringify({ result: `Deleted: ${input.id}` });
+    }
+
+    // ── LIST ─────────────────────────────────────────────────────────────
+    if (action === 'list') {
+      let items = load();
+      if (input.from) items = items.filter(i => i.date >= input.from);
+      if (input.to)   items = items.filter(i => i.date <= input.to);
+      items.sort((a, b) => {
+        const da = a.date + 'T' + a.startTime;
+        const db = b.date + 'T' + b.startTime;
+        return da < db ? -1 : da > db ? 1 : 0;
+      });
+      return JSON.stringify({ result: JSON.stringify(items) });
+    }
+
+    // ── SEARCH (RAG) ─────────────────────────────────────────────────────
+    if (action === 'search') {
+      const q = (input.query || '').toLowerCase();
+      const items = load().filter(i => {
+        const nameMatch = !q || (i.name || '').toLowerCase().includes(q);
+        const dateMatch = !input.date || i.date === input.date;
+        return nameMatch && dateMatch;
+      });
+      return JSON.stringify({ result: JSON.stringify(items) });
+    }
+
+    // ── UNSYNCED ─────────────────────────────────────────────────────────
+    if (action === 'unsynced') {
+      const items = load().filter(i => !i.synced);
+      return JSON.stringify({ result: JSON.stringify(items) });
+    }
+
+    // ── MARK_SYNCED ──────────────────────────────────────────────────────
+    if (action === 'mark_synced') {
+      if (!input.id) return JSON.stringify({ error: 'Missing id' });
+      const items = load();
+      const idx = items.findIndex(i => i.id === input.id);
+      if (idx === -1) return JSON.stringify({ error: `Event not found: ${input.id}` });
+      items[idx].synced = true;
+      items[idx].googleEventId = input.googleEventId || null;
+      items[idx].updatedAt = Date.now();
+      save(items);
+      return JSON.stringify({ result: `Synced: ${input.id}` });
+    }
+
+    return JSON.stringify({ error: `Unknown action: ${action}` });
+
+  } catch (err) {
+    return JSON.stringify({ error: err.message });
+  }
+};
+</script>
+</body>
+</html>
