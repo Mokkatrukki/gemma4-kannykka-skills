@@ -210,6 +210,23 @@ When a skill needs to avoid duplicates (e.g., calendar events), instruct the LLM
 2. If match found → call with `action: "update"` + found item's `id`
 3. If no match → call with `action: "add"`
 
+## Deploying / Installing Skills
+
+### From URL (Android, recommended)
+Host on GitHub Pages. User enters folder URL in Gallery app (e.g. `https://user.github.io/repo/skill-name`). Non-google-ai-edge hosts show a disclaimer dialog — user must tap **Agree** to proceed.
+
+### Local import (iOS and Android)
+**Skills must be imported as a folder, NOT a zip file.**
+
+Steps:
+1. Copy the skill folder (e.g. `calendar-storage/`) to the device
+2. iOS: use AirDrop, iCloud Drive, or USB file transfer → Files app
+3. In Gallery app: Add skill → Import local skill → select the folder
+4. Do NOT zip the folder — the app expects a directory, not an archive
+
+### Secret injection
+When `require-secret: true`, the app shows a dialog before the first JS call. The user pastes the secret (API key, JSON, token) there. The skill receives it as the **second parameter**: `async (data, secret) => {}`
+
 ## Examples
 
 See `references/examples.md` for complete worked examples of each skill type.
