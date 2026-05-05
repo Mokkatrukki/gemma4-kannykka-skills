@@ -1,11 +1,18 @@
 ---
 name: calendar-capture
-description: "Extracts calendar events from photos, screenshots, or text descriptions and saves them to the device calendar. Use this skill when the user takes a photo of an invitation, appointment card, flyer, or screen, or describes an event verbally. Triggers on: add this to calendar, save this event, take a photo of this invite, put this in my calendar, lisää kalenteriin, tallenna tapahtuma."
+description: Extracts calendar events from photos, screenshots, or text descriptions and saves them to the device calendar. Use when the user wants to add an event to their calendar.
 ---
 
 # Calendar Capture
 
 Extracts event details from an image or text and saves them to the local calendar, checking for duplicates first.
+
+## Instructions
+
+This skill does not call `run_js` directly. It coordinates between the user and the `calendar-storage` skill.
+When saving or searching events, call the `calendar-storage` skill using the `run_js` tool:
+- script name: index.html
+- data: JSON string as described in the actions below.
 
 ## When to use
 

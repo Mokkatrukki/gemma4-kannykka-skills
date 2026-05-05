@@ -1,9 +1,15 @@
 ---
 name: calendar-storage
-description: "Stores, retrieves, searches, and manages calendar events in device local storage. Use this skill to add, update, delete, list, or search calendar events. Called internally by calendar-capture and calendar-sync skills. Triggers on: show my events, list calendar, delete event, what do I have this week, mitä minulla on kalenterissa."
+description: Stores and manages calendar events in device local storage. Use when the user wants to add, update, delete, list, or search calendar events.
 ---
 
 # Calendar Storage
+
+## Instructions
+
+Call the `run_js` tool with the following parameters:
+- script name: index.html
+- data: A JSON string with an `action` field and action-specific fields below.
 
 Local calendar database using device localStorage. Supports full CRUD and fuzzy search for duplicate detection.
 

@@ -68,10 +68,10 @@ async function getAccessToken(serviceAccountJson) {
 }
 
 // ── Main skill function ──────────────────────────────────────────────────────
-window['ai_edge_gallery_get_result'] = async (data) => {
+window['ai_edge_gallery_get_result'] = async (data, secret) => {
   try {
     const input = JSON.parse(data);
-    const { action, secret } = input;
+    const { action } = input;
 
     if (!secret) {
       return JSON.stringify({ error: 'No service account JSON. Add it via skill settings.' });
