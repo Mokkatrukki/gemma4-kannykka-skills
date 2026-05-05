@@ -1,6 +1,6 @@
 ---
 name: calendar-sync
-description: Syncs local calendar events to Google Calendar using a service account. Use this skill when the user wants to push saved events to Google Calendar, sync their schedule, or asks why an event isn't showing in Google Calendar. Triggers on: "sync to Google Calendar", "push events to Google", "synkkaa kalenteri", "vie tapahtumat Googleen".
+description: "Syncs local calendar events to Google Calendar using a service account. Use this skill when the user wants to push saved events to Google Calendar, sync their schedule, or asks why an event isn't showing in Google Calendar. Triggers on: sync to Google Calendar, push events to Google, synkkaa kalenteri, vie tapahtumat Googleen."
 metadata:
   require-secret: true
   require-secret-description: |

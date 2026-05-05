@@ -1,6 +1,6 @@
 ---
 name: calendar-capture
-description: Extracts calendar events from photos, screenshots, or text descriptions and saves them to the device calendar. Use this skill when the user takes a photo of an invitation, appointment card, flyer, or screen, or describes an event verbally. Triggers on: "add this to calendar", "save this event", "take a photo of this invite", "put this in my calendar", "lisää kalenteriin", "tallenna tapahtuma".
+description: "Extracts calendar events from photos, screenshots, or text descriptions and saves them to the device calendar. Use this skill when the user takes a photo of an invitation, appointment card, flyer, or screen, or describes an event verbally. Triggers on: add this to calendar, save this event, take a photo of this invite, put this in my calendar, lisää kalenteriin, tallenna tapahtuma."
 ---
 
 # Calendar Capture

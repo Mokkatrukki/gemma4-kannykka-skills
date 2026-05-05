@@ -1,6 +1,6 @@
 ---
 name: calendar-storage
-description: Stores, retrieves, searches, and manages calendar events in device local storage. Use this skill to add, update, delete, list, or search calendar events. Called internally by calendar-capture and calendar-sync skills. Triggers on: "show my events", "list calendar", "delete event", "what do I have this week", "mitä minulla on kalenterissa".
+description: "Stores, retrieves, searches, and manages calendar events in device local storage. Use this skill to add, update, delete, list, or search calendar events. Called internally by calendar-capture and calendar-sync skills. Triggers on: show my events, list calendar, delete event, what do I have this week, mitä minulla on kalenterissa."
 ---
 
 # Calendar Storage
